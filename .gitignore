@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Node (dev)
+node_modules/
+.env
+*.log
+.next/
+dist/
+coverage/
+
+# SQLite (dev)
+*.db
+*.db-journal
+prisma/migrations/dev.db*
+
+# Editor
+.vscode/
+.idea/

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar contraseña · All At Once</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/paginas.css">
+</head>
+<body class="auth-page">
+
+  <main class="auth">
+    <button class="auth__backbtn" onclick="window.location.href='login.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6-6 6 6 6"/></svg>
+      Atrás
+    </button>
+    <a href="index.html" class="logo auth__logo" aria-label="Volver a All At Once">
+      <span class="logo__mark">AAO</span>
+      <span class="logo__text">All<b>At</b>Once</span>
+    </a>
+
+    <div class="auth__card">
+      <h1 class="auth__title">Recuperar contraseña</h1>
+      <p style="font-size:.87rem;color:var(--ink-soft);margin:-8px 0 16px">Introduce tu email y te enviaremos instrucciones para restablecerla.</p>
+      <div class="auth__alert" id="recAlert" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.6 17a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <div><strong>Hay un problema</strong><p id="recMsg"></p></div>
+      </div>
+      <form id="recForm" novalidate>
+        <label class="auth__label" for="recEmail">Email</label>
+        <input class="auth__input" type="email" id="recEmail" placeholder="tu@email.com" autocomplete="email">
+        <button class="auth__btn" type="submit">Enviar instrucciones</button>
+      </form>
+      <div id="recOk" hidden style="margin-top:16px">
+        <div class="coupon-ok" style="margin-top:0">
+          <span>Te hemos enviado un correo (simulado en esta demo).</span>
+        </div>
+        <div class="auth__demo" style="margin-top:14px">
+          <p><strong>Contraseña temporal generada:</strong></p>
+          <p class="auth__demo-creds"><code id="tempPass"></code></p>
+          <p style="font-size:.76rem">Úsala para iniciar sesión y cámbiala después desde tu cuenta.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="auth__foot">
+      <p><a href="politicas.html">Privacidad</a> · <a href="contacto.html">Ayuda</a></p>
+      <p>© 2026 All At Once</p>
+    </footer>
+  </main>
+
+  <script src="js/auth.js"></script>
+  <script>
+    AAO_AUTH.seed();
+    document.getElementById("recForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("recEmail").value.trim().toLowerCase();
+      const alert = document.getElementById("recAlert");
+      if (!AAO_AUTH.find(email)) {
+        document.getElementById("recMsg").textContent = "No encontramos una cuenta con ese email.";
+        alert.hidden = false;
+        return;
+      }
+      alert.hidden = true;
+      const temp = "aao-" + Math.random().toString(36).slice(2, 8);
+      AAO_AUTH.resetPassword(email, temp);
+      document.getElementById("tempPass").textContent = temp;
+      document.getElementById("recOk").hidden = false;
+      document.getElementById("recForm").style.display = "none";
+    });
+  </script>
+</body>
+</html>

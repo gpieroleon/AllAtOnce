@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión · All At Once</title>
+  <meta name="description" content="Inicia sesión en tu cuenta de All At Once para comprar más rápido, ver tus pedidos y guardar tus favoritos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+
+  <main class="auth">
+    <a href="index.html" class="logo auth__logo" aria-label="Volver a All At Once">
+      <span class="logo__mark">AAO</span>
+      <span class="logo__text">All<b>At</b>Once</span>
+    </a>
+    <button class="auth__backbtn" id="backBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6-6 6 6 6"/></svg>
+      Atrás
+    </button>
+
+    <div class="auth__card">
+      <!-- Alerta estilo Amazon -->
+      <div class="auth__alert" id="authAlert" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.6 17a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <div>
+          <strong>Hay un problema</strong>
+          <p id="authMsg"></p>
+        </div>
+      </div>
+
+      <!-- Paso 1: email -->
+      <section id="stepEmail">
+        <h1 class="auth__title">Iniciar sesión</h1>
+        <form id="emailForm" novalidate>
+          <label class="auth__label" for="emailInput">Email</label>
+          <input class="auth__input" type="email" id="emailInput" autocomplete="email" placeholder="tu@email.com">
+          <button class="auth__btn" type="submit">Continuar</button>
+        </form>
+        <p class="auth__legal">Al continuar, aceptas las <a href="#">Condiciones de uso</a> y la <a href="#">Política de privacidad</a> de All At Once.</p>
+      </section>
+
+      <!-- Paso 2: contraseña -->
+      <section id="stepPass" hidden>
+        <h1 class="auth__title">Iniciar sesión</h1>
+        <p class="auth__identity"><span id="passEmail"></span> <button type="button" class="auth__change" id="changeEmail">Cambiar</button></p>
+        <form id="passForm" novalidate>
+          <label class="auth__label" for="passInput">Contraseña</label>
+          <input class="auth__input" type="password" id="passInput" autocomplete="current-password" placeholder="Tu contraseña">
+          <label class="auth__check"><input type="checkbox" id="showPass"> Mostrar contraseña</label>
+          <button class="auth__btn" type="submit">Iniciar sesión</button>
+        </form>
+        <p class="auth__legal"><a href="#">¿Has olvidado tu contraseña?</a></p>
+      </section>
+
+      <!-- Crear cuenta -->
+      <section id="stepRegister" hidden>
+        <h1 class="auth__title">Crear cuenta</h1>
+        <form id="registerForm" novalidate>
+          <label class="auth__label" for="regName">Nombre</label>
+          <input class="auth__input" type="text" id="regName" autocomplete="name" placeholder="Tu nombre">
+          <label class="auth__label" for="regEmail">Email</label>
+          <input class="auth__input" type="email" id="regEmail" autocomplete="email" placeholder="tu@email.com">
+          <label class="auth__label" for="regPass">Contraseña</label>
+          <input class="auth__input" type="password" id="regPass" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
+          <label class="auth__check"><input type="checkbox" id="showRegPass"> Mostrar contraseña</label>
+          <button class="auth__btn" type="submit">Crear tu cuenta de All At Once</button>
+        </form>
+        <p class="auth__legal">Al crear una cuenta, aceptas las <a href="#">Condiciones de uso</a> y la <a href="#">Política de privacidad</a> de All At Once.</p>
+        <button type="button" class="auth__back" id="backLogin">‹ Volver a iniciar sesión</button>
+      </section>
+    </div>
+
+    <div class="auth__divider" id="authDivider"><span>¿Nuevo en All At Once?</span></div>
+    <button class="auth__btn auth__btn--ghost" id="createBtn">Crea tu cuenta de All At Once</button>
+
+    <footer class="auth__foot">
+      <p><a href="#">Condiciones de uso</a> · <a href="#">Privacidad</a> · <a href="#">Ayuda</a></p>
+      <p>© 2026 All At Once</p>
+    </footer>
+  </main>
+
+  <script src="js/auth.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

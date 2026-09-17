@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido confirmado · All At Once</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/paginas.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo" aria-label="All At Once — inicio">
+        <span class="logo__mark">AAO</span>
+        <span class="logo__text">All<b>At</b>Once</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page container" id="confirmRoot"></main>
+
+  <footer class="footer">
+    <div class="container footer__bottom" style="border-top:none">
+      <p>© 2026 All At Once. Todos los derechos reservados.</p>
+      <p><a href="politicas.html">Privacidad</a> · <a href="politicas.html">Términos</a></p>
+    </div>
+  </footer>
+
+  <script src="js/catalog.js"></script>
+  <script src="js/auth.js"></script>
+  <script>AAO_AUTH.seed();</script>
+  <script src="js/confirmacion.js"></script>
+</body>
+</html>

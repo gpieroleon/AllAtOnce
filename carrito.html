@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu cesta · All At Once</title>
+  <meta name="description" content="Revisa los artículos de tu cesta, aplica cupones y procede al pago de forma segura en All At Once.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/paginas.css">
+</head>
+<body class="no-wish">
+
+  <div class="flashbar">
+    <div class="container flashbar__inner">
+      <p class="flashbar__msg"><span class="flashbar__dot"></span> VENTA FLASH · Hasta <strong>50% OFF</strong> en selección</p>
+      <p class="flashbar__timer">Termina en <span class="countdown" id="flashCountdown">00:00:00</span></p>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo" aria-label="All At Once — inicio">
+        <span class="logo__mark">AAO</span>
+        <span class="logo__text">All<b>At</b>Once</span>
+      </a>
+      <form class="search" id="searchForm" role="search">
+        <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="searchInput" class="search__input" placeholder="Busca productos, marcas y más…" aria-label="Buscar productos">
+        <button class="search__btn" type="submit">Buscar</button>
+      </form>
+      <div class="header__actions">
+        <div class="auth-wrap">
+          <a class="action" id="authLink" href="login.html" aria-label="Mi cuenta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+            <span class="action__label" id="authLabel">Iniciar sesión</span>
+          </a>
+          <div class="auth-menu" id="authMenu" hidden>
+            <p class="auth-menu__hello">Hola, <strong id="authName"></strong></p>
+            <button class="auth-menu__item" id="accountBtn" type="button">Mi cuenta</button>
+            <button class="auth-menu__item" id="ordersBtn" type="button">Mis pedidos</button>
+            <button class="auth-menu__item" id="favBtn" type="button">Favoritos</button>
+            <button class="auth-menu__item auth-menu__item--logout" id="logoutBtn" type="button">Cerrar sesión</button>
+          </div>
+        </div>
+        <a class="action" href="favoritos.html" aria-label="Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3.4 1-4.5 2.5C10.9 4 9.3 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7z"/></svg>
+          <span class="action__label">Favoritos</span>
+        </a>
+        <a class="action" href="carrito.html" aria-label="Ver cesta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 3h2l2.6 12.4a1.5 1.5 0 0 0 1.5 1.1h7.9a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6"/></svg>
+          <span class="action__badge" id="cartCount" hidden>0</span>
+          <span class="action__label">Cesta</span>
+        </a>
+      </div>
+      <button class="burger" id="burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="catnav" id="catnav" aria-label="Secciones">
+      <div class="container catnav__inner">
+        <a class="catnav__link" href="categoria.html?cat=ofertas">Ofertas</a>
+        <a class="catnav__link" href="categoria.html?cat=Tech">Tecnología</a>
+        <a class="catnav__link" href="categoria.html?cat=Moda">Moda</a>
+        <a class="catnav__link" href="categoria.html?cat=Hogar">Hogar</a>
+        <a class="catnav__link" href="categoria.html?cat=Belleza">Belleza</a>
+        <a class="catnav__link" href="categoria.html?cat=Accesorios">Accesorios</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page container">
+    <nav class="crumbs" aria-label="Migas de pan">
+      <a href="index.html">Inicio</a><span aria-hidden="true">›</span><span>Cesta</span>
+    </nav>
+    <div class="page-head">
+      <h1>Tu cesta</h1>
+      <p id="cartSub"></p>
+    </div>
+    <div id="cartRoot"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__bottom" style="border-top:none">
+      <p>© 2026 All At Once. Todos los derechos reservados.</p>
+      <p><a href="politicas.html">Privacidad</a> · <a href="politicas.html">Términos</a> · <a href="politicas.html">Cookies</a></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastMsg"></span>
+  </div>
+
+  <script src="js/catalog.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    AAO_AUTH.seed();
+    AAO_AUTH.renderHeaderAuth();
+    document.getElementById("authLink").href = "login.html?from=" + encodeURIComponent("carrito.html");
+  </script>
+  <script src="js/carrito.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tramitar pedido · All At Once</title>
+  <meta name="description" content="Finaliza tu compra en All At Once: datos de envío, método de pago y confirmación en tres pasos sencillos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/paginas.css">
+</head>
+<body class="no-wish">
+
+  <div class="flashbar">
+    <div class="container flashbar__inner">
+      <p class="flashbar__msg"><span class="flashbar__dot"></span> COMPRA SEGURA · Pago cifrado</p>
+      <p class="flashbar__timer">Devoluciones gratis hasta 30 días</p>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo" aria-label="All At Once — inicio">
+        <span class="logo__mark">AAO</span>
+        <span class="logo__text">All<b>At</b>Once</span>
+      </a>
+      <div class="header__actions" style="margin-left:auto">
+        <a class="action" href="carrito.html" aria-label="Volver a la cesta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 3h2l2.6 12.4a1.5 1.5 0 0 0 1.5 1.1h7.9a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6"/></svg>
+          <span class="action__label">Volver a la cesta</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page container page--narrow" id="checkoutRoot"></main>
+
+  <footer class="footer">
+    <div class="container footer__bottom" style="border-top:none">
+      <p>© 2026 All At Once. Todos los derechos reservados.</p>
+      <p><a href="politicas.html">Privacidad</a> · <a href="politicas.html">Términos</a></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastMsg"></span>
+  </div>
+
+  <script src="js/catalog.js"></script>
+  <script src="js/auth.js"></script>
+  <script>AAO_AUTH.seed();</script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

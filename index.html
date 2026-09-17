@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All At Once — Todo lo que buscas, en un solo lugar</title>
+  <meta name="description" content="All At Once: tecnología, moda, hogar y belleza con envío rápido, ofertas flash y precios irresistibles. Todo lo que buscas, en un solo lugar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ══════════ FLASH BAR ══════════ -->
+  <div class="flashbar">
+    <div class="container flashbar__inner">
+      <p class="flashbar__msg"><span class="flashbar__dot"></span> VENTA FLASH · Hasta <strong>50% OFF</strong> en selección</p>
+      <p class="flashbar__timer">Termina en <span class="countdown" id="flashCountdown">00:00:00</span></p>
+    </div>
+  </div>
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo" aria-label="All At Once — inicio">
+        <span class="logo__mark">AAO</span>
+        <span class="logo__text">All<b>At</b>Once</span>
+      </a>
+
+      <div class="search">
+        <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="searchInput" class="search__input" placeholder="Busca productos, marcas y más…" aria-label="Buscar productos">
+        <button class="search__btn" id="searchBtn">Buscar</button>
+      </div>
+
+      <div class="header__actions">
+        <div class="auth-wrap">
+          <a class="action" id="authLink" href="login.html" aria-label="Mi cuenta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+            <span class="action__label" id="authLabel">Iniciar sesión</span>
+          </a>
+          <div class="auth-menu" id="authMenu" hidden>
+            <p class="auth-menu__hello">Hola, <strong id="authName"></strong></p>
+            <button class="auth-menu__item" id="accountBtn" type="button">Mi cuenta</button>
+            <button class="auth-menu__item" id="ordersBtn" type="button">Mis pedidos</button>
+            <button class="auth-menu__item" id="favBtn" type="button">Favoritos</button>
+            <button class="auth-menu__item auth-menu__item--logout" id="logoutBtn" type="button">Cerrar sesión</button>
+          </div>
+        </div>
+        <button class="action" id="wishBtn" aria-label="Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3.4 1-4.5 2.5C10.9 4 9.3 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7z"/></svg>
+          <span class="action__badge" id="wishCount" hidden>0</span>
+          <span class="action__label">Favoritos</span>
+        </button>
+        <button class="action" id="cartBtn" aria-label="Abrir carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 3h2l2.6 12.4a1.5 1.5 0 0 0 1.5 1.1h7.9a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6"/></svg>
+          <span class="action__badge" id="cartCount" hidden>0</span>
+          <span class="action__label">Carrito</span>
+        </button>
+      </div>
+      <button class="burger" id="burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="catnav" id="catnav" aria-label="Secciones">
+      <div class="container catnav__inner" id="catnavInner">
+        <a class="catnav__link" href="categoria.html?cat=ofertas">Ofertas</a>
+        <a class="catnav__link" href="categoria.html?cat=Tech">Tecnología</a>
+        <a class="catnav__link" href="categoria.html?cat=Moda">Moda</a>
+        <a class="catnav__link" href="categoria.html?cat=Hogar">Hogar</a>
+        <a class="catnav__link" href="categoria.html?cat=Belleza">Belleza</a>
+        <a class="catnav__link" href="categoria.html?cat=Accesorios">Accesorios</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══════════ PROMO CAROUSEL (estilo Amazon) ══════════ -->
+  <section class="promo" id="inicio">
+    <div class="promo__slides" id="promoSlides"><!-- JS --></div>
+    <button class="promo__arrow promo__arrow--prev" id="promoPrev" aria-label="Promoción anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6-6 6 6 6"/></svg>
+    </button>
+    <button class="promo__arrow promo__arrow--next" id="promoNext" aria-label="Siguiente promoción">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6 6 6-6 6"/></svg>
+    </button>
+    <div class="promo__dots" id="promoDots"></div>
+  </section>
+
+  <!-- ══════════ SHELF · tarjetas de categoría sobre el promo ══════════ -->
+  <section class="shelf">
+    <div class="container shelf__grid" id="shelfGrid"><!-- JS --></div>
+  </section>
+
+  <!-- ══════════ OFERTAS FLASH ══════════ -->
+  <section class="section deals" id="ofertas">
+    <div class="container">
+      <div class="deals__head reveal">
+        <div>
+          <h2 class="section__title section__title--light">Ofertas relámpago</h2>
+          <p class="section__sub section__sub--light">Stock limitado. Cuando el contador llegue a cero, vuelven a subir.</p>
+        </div>
+        <div class="deals__right">
+          <div class="deals__timer">
+            <span>Termina en</span>
+            <div class="countdown-boxes" id="dealCountdown">
+              <div class="cbox"><b id="cdH">00</b><i>hrs</i></div>
+              <div class="cbox"><b id="cdM">00</b><i>min</i></div>
+              <div class="cbox"><b id="cdS">00</b><i>seg</i></div>
+            </div>
+          </div>
+          <div class="deals__nav">
+            <button class="rowarrow rowarrow--dark" data-scroll="dealsTrack" data-dir="-1" aria-label="Ofertas anteriores">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6-6 6 6 6"/></svg>
+            </button>
+            <button class="rowarrow rowarrow--dark" data-scroll="dealsTrack" data-dir="1" aria-label="Más ofertas">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6 6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="deals__track" id="dealsTrack"><!-- JS --></div>
+    </div>
+  </section>
+
+  <!-- ══════════ LOS MÁS VENDIDOS ══════════ -->
+  <section class="section bestsellers">
+    <div class="container">
+      <div class="bestsellers__head reveal">
+        <div>
+          <h2 class="section__title">Los más vendidos</h2>
+          <p class="section__sub">Los favoritos de nuestra comunidad, actualizados cada semana.</p>
+        </div>
+        <div class="rows__nav">
+          <button class="rowarrow" data-scroll="bestTrack" data-dir="-1" aria-label="Productos anteriores">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6-6 6 6 6"/></svg>
+          </button>
+          <button class="rowarrow" data-scroll="bestTrack" data-dir="1" aria-label="Más productos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="rows" id="bestTrack"><!-- JS --></div>
+    </div>
+  </section>
+
+  <!-- ══════════ TIENDA ══════════ -->
+  <section class="section shop" id="tienda">
+    <div class="container">
+      <div class="section__head reveal">
+        <h2 class="section__title">Descubre más</h2>
+        <p class="section__sub">Filtra por categoría, ordena o busca exactamente lo que necesitas.</p>
+      </div>
+      <div class="shop__toolbar reveal">
+        <div class="chips" id="chips">
+          <button class="chip is-active" data-cat="all">Todo</button>
+          <button class="chip" data-cat="Tech">Tecnología</button>
+          <button class="chip" data-cat="Moda">Moda</button>
+          <button class="chip" data-cat="Hogar">Hogar</button>
+          <button class="chip" data-cat="Belleza">Belleza</button>
+          <button class="chip" data-cat="Accesorios">Accesorios</button>
+        </div>
+        <select class="sort" id="sortSelect" aria-label="Ordenar productos">
+          <option value="featured">Destacados</option>
+          <option value="rating">Mejor valorados</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="discount">Mayor descuento</option>
+        </select>
+      </div>
+      <div class="grid" id="productGrid"><!-- JS --></div>
+      <p class="grid__empty" id="gridEmpty" hidden>No encontramos productos para tu búsqueda. Prueba con otra palabra.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ VALOR AÑADIDO ══════════ -->
+  <section class="section perks">
+    <div class="container perks__grid">
+      <div class="perk reveal">
+        <span class="perk__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
+        </span>
+        <h3>Envío gratis +€75</h3><p>Envío exprés en 24/48h en miles de productos.</p>
+      </div>
+      <div class="perk reveal">
+        <span class="perk__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        </span>
+        <h3>Devoluciones 30 días</h3><p>Cambios y devoluciones gratis, sin preguntas.</p>
+      </div>
+      <div class="perk reveal">
+        <span class="perk__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </span>
+        <h3>Compra protegida</h3><p>Pago cifrado y reembolso total si algo sale mal.</p>
+      </div>
+      <div class="perk reveal">
+        <span class="perk__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M17 12h-5V7"/><path d="M21 3 17 7"/></svg>
+        </span>
+        <h3>Soporte 24/7</h3><p>Personas reales, en español, a cualquier hora.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ NEWSLETTER ══════════ -->
+  <section class="section newsletter">
+    <div class="container newsletter__box reveal">
+      <div class="newsletter__copy">
+        <h2 class="section__title section__title--light">-10% en tu primer pedido</h2>
+        <p class="section__sub section__sub--light">Únete y recibe ofertas exclusivas, cupones y novedades antes que nadie.</p>
+      </div>
+      <form class="newsletter__form" id="newsletterForm">
+        <input type="email" placeholder="tu@email.com" required aria-label="Tu email">
+        <button class="btn btn--light" type="submit">Quiero mi cupón</button>
+      </form>
+      <p class="newsletter__ok" id="newsletterOk" hidden>¡Listo! Revisa tu bandeja: tu cupón va en camino.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="#inicio" class="logo logo--light">
+          <span class="logo__mark">AAO</span>
+          <span class="logo__text">All<b>At</b>Once</span>
+        </a>
+        <p>Todo lo que buscas, en un solo lugar. Compra rápido, recibe antes, paga seguro.</p>
+        <div class="footer__pay" aria-label="Métodos de pago">
+          <span>VISA</span><span>Mastercard</span><span>PayPal</span><span>Apple&nbsp;Pay</span>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Comprar</h4>
+        <a href="#tienda">Lo más vendido</a><a href="categoria.html?cat=ofertas">Ofertas flash</a><a href="categoria.html?cat=all">Todas las categorías</a><a href="producto.html?id=9">Novedades</a>
+      </div>
+      <div class="footer__col">
+        <h4>Ayuda</h4>
+        <a href="contacto.html">Contacto</a><a href="sobre-nosotros.html">Sobre nosotros</a><a href="politicas.html">Envíos y devoluciones</a><a href="politicas.html">Privacidad y términos</a>
+      </div>
+      <div class="footer__col">
+        <h4>Empresa</h4>
+        <a href="sobre-nosotros.html">Nuestra historia</a><a href="admin.html">Acceso admin</a><a href="contacto.html">Prensa</a><a href="contacto.html">Afiliados</a>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© 2026 All At Once. Todos los derechos reservados.</p>
+      <p><a href="politicas.html">Privacidad</a> · <a href="politicas.html">Términos</a> · <a href="politicas.html">Cookies</a></p>
+    </div>
+  </footer>
+
+  <!-- ══════════ CART DRAWER ══════════ -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart" id="cartDrawer" aria-label="Carrito de compra">
+    <div class="cart__head">
+      <h3>Tu carrito <span id="cartHeadCount"></span></h3>
+      <button class="cart__close" id="cartClose" aria-label="Cerrar carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="cart__ship" id="shipBar">
+      <p id="shipMsg"></p>
+      <div class="cart__ship-track"><div class="cart__ship-fill" id="shipFill"></div></div>
+    </div>
+    <div class="cart__items" id="cartItems"></div>
+    <div class="cart__foot">
+      <div class="cart__row"><span>Subtotal</span><strong id="cartSubtotal">€0,00</strong></div>
+      <div class="cart__row cart__row--muted"><span>Envío</span><span id="cartShipping">—</span></div>
+      <div class="cart__row cart__row--total"><span>Total</span><strong id="cartTotal">€0,00</strong></div>
+      <button class="btn btn--primary btn--block btn--lg" id="checkoutBtn">Tramitar pedido</button>
+      <p class="cart__secure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Pago 100% seguro y cifrado
+      </p>
+    </div>
+  </aside>
+
+  <!-- ══════════ TOAST ══════════ -->
+  <div class="toast" id="toast" role="status">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastMsg">Añadido al carrito</span>
+  </div>
+
+  <script src="js/catalog.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    AAO_AUTH.seed();
+    AAO_AUTH.renderHeaderAuth();
+    document.getElementById("authLink").href = "login.html?from=" + encodeURIComponent("index.html");
+  </script>
+</body>
+</html>

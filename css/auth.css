@@ -1,0 +1,224 @@
+/* ═══════════════════════════════════════════════════════════
+   ALL AT ONCE — Página de acceso (referencia: amazon.com)
+   Columna centrada, tarjeta blanca con borde, alertas en
+   caja roja, flujo email → contraseña, divisor "¿Nuevo en…?"
+   ═══════════════════════════════════════════════════════════ */
+
+.auth-page {
+  background: #F0EDE8;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 34px 20px 60px;
+}
+
+.auth {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Botón Atrás (bajo el logo): vuelve exactamente a donde estaba el usuario */
+.auth__backbtn {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .88rem; font-weight: 600; color: var(--ink-soft);
+  padding: 8px 14px 8px 9px; margin: 0 0 16px -10px;
+  border-radius: 999px;
+  transition: background .2s, color .2s;
+}
+.auth__backbtn svg { width: 17px; height: 17px; }
+.auth__backbtn:hover { background: #fff; color: var(--accent); }
+
+.auth__logo {
+  align-self: center;
+  margin-bottom: 22px;
+}
+
+/* Tarjeta */
+.auth__card {
+  background: #fff;
+  border: 1px solid #DCD5CB;
+  border-radius: 12px;
+  padding: 26px 26px 24px;
+  box-shadow: 0 2px 8px rgba(23, 19, 16, .05);
+}
+
+.auth__title {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 16px;
+}
+
+/* Alerta estilo Amazon */
+.auth__alert {
+  display: flex;
+  gap: 10px;
+  background: #FEF2F2;
+  border: 1px solid #F3B4B4;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+.auth__alert[hidden] { display: none; }
+.auth__alert svg { width: 22px; height: 22px; color: #DC2626; flex-shrink: 0; margin-top: 1px; }
+.auth__alert strong { display: block; font-size: .88rem; color: #B91C1C; }
+.auth__alert p { font-size: .83rem; color: #7F1D1D; margin-top: 2px; }
+
+/* Campos */
+.auth__label {
+  display: block;
+  font-size: .83rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.auth__input {
+  width: 100%;
+  border: 1.5px solid #C9C0B4;
+  border-radius: 9px;
+  background: #fff;
+  padding: 11px 13px;
+  font-size: .93rem;
+  margin-bottom: 14px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.auth__input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.auth__input.is-error {
+  border-color: #DC2626;
+  box-shadow: 0 0 0 3px #FEE2E2;
+}
+
+.auth__check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .82rem;
+  color: var(--ink-soft);
+  margin: -4px 0 16px;
+  cursor: pointer;
+}
+.auth__check input { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+
+/* Botones (referencia Amazon: a todo lo ancho) */
+.auth__btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .95rem;
+  transition: filter .2s, transform .2s var(--ease);
+}
+.auth__btn:hover { filter: brightness(1.07); }
+.auth__btn:active { transform: scale(.99); }
+.auth__btn--ghost {
+  background: #fff;
+  color: var(--ink);
+  border: 1.5px solid #C9C0B4;
+}
+.auth__btn--ghost:hover { background: #FAF6F1; filter: none; }
+
+/* Identidad en paso de contraseña */
+.auth__identity {
+  font-size: .88rem;
+  margin: -6px 0 14px;
+  color: var(--ink-soft);
+}
+.auth__change {
+  color: var(--accent);
+  font-size: .82rem;
+  font-weight: 600;
+  margin-left: 4px;
+  text-decoration: underline;
+}
+
+.auth__legal {
+  font-size: .76rem;
+  color: var(--ink-soft);
+  margin-top: 14px;
+  line-height: 1.5;
+}
+.auth__legal a { color: var(--accent); }
+.auth__legal a:hover { text-decoration: underline; }
+
+.auth__back {
+  margin-top: 14px;
+  font-size: .84rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+.auth__back:hover { text-decoration: underline; }
+
+/* Divisor "¿Nuevo en…?" */
+.auth__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 14px;
+  color: var(--ink-soft);
+  font-size: .8rem;
+  font-weight: 500;
+}
+.auth__divider::before, .auth__divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #C9C0B4;
+}
+
+/* Caja demo */
+.auth__demo {
+  margin-top: 26px;
+  border: 1.5px dashed #F0B4A2;
+  background: #FFF4EF;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: .8rem;
+  color: var(--ink-soft);
+}
+.auth__demo-creds {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0 10px;
+}
+.auth__demo-creds code {
+  background: #fff;
+  border: 1px solid #F0CDBF;
+  border-radius: 7px;
+  padding: 4px 9px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.auth__demo-fill {
+  width: 100%;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  border-radius: 9px;
+  padding: 8px;
+  font-size: .82rem;
+  font-weight: 600;
+  transition: background .2s, color .2s;
+}
+.auth__demo-fill:hover { background: var(--accent); color: #fff; }
+
+/* Pie */
+.auth__foot {
+  margin-top: 34px;
+  text-align: center;
+  font-size: .74rem;
+  color: var(--ink-soft);
+}
+.auth__foot p + p { margin-top: 5px; }
+.auth__foot a:hover { color: var(--accent); text-decoration: underline; }
