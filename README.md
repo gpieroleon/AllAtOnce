@@ -1,49 +1,64 @@
-# All At Once
+# All At Once — rama `dev` (migración Next.js + NestJS)
 
-E-commerce de demostración — tecnología, moda, hogar, belleza y accesorios con ofertas flash, envío exprés y panel de administración.
+Migración full-stack de la demo estática, para comparar arquitecturas antes de
+decidir si reemplaza a `main`.
 
-## Rama `main` — Demo estática (vanilla)
+## Arquitectura
 
-Sitio completo en **HTML + CSS + JavaScript** sin frameworks ni build. Los datos viven en `localStorage` (usuarios, pedidos, carrito, cupones).
+```
+├── api/         ← NestJS 10 + Prisma + SQLite  (http://localhost:3001/api)
+└── storefront/  ← Next.js 14 App Router + Tailwind (http://localhost:3000)
+```
 
-### Ejecutar
+Contrato de la API: [`docs/CONTRACT.md`](docs/CONTRACT.md). La demo vanilla
+original sigue en la raíz del repo (funciona igual, datos en localStorage).
+
+## Puesta en marcha
 
 ```bash
-python3 -m http.server 8000
-# http://localhost:8000
+# 1. API
+cd api
+npm install
+npx prisma migrate dev
+npm run seed
+npm run start:dev        # :3001
+
+# 2. Storefront (en otra terminal)
+cd storefront
+npm install
+npm run dev              # :3000  (o `npm run build && npm run start`)
 ```
 
-### Credenciales de demo
+## Verificación ya ejecutada
 
-| Rol | Email | Contraseña | Entrada |
-|---|---|---|---|
-| Cliente | `demo@allatonce.com` | `AllAtOnce#2026` | `/login.html` |
-| Admin | `equipo@allatonce.com` | `Equipo2026!` | `/admin.html` |
-| Superadmin | `admin@allatonce.com` | `Admin2026!` | `/admin.html` |
+- API: `npm run build` OK · `npm run test:e2e` 6/6 · smoke real: 12 productos,
+  login JWT, cupón AAO10 (−18 €), pedido guest 2×Nova X → total **161,98 €**
+  calculado en servidor, guard de roles (cliente → 403 en `/admin/stats`).
+- Storefront: `npm run build` OK (16 rutas) · `next lint` limpio · las 15 rutas
+  responden 200 con la API real levantada.
 
-Cupones: `AAO10` (-10%), `FLASH20` (-20%).
+## Credenciales (seed)
 
-### Estructura
+| Rol | Email | Contraseña |
+|---|---|---|
+| Cliente | `demo@allatonce.com` | `AllAtOnce#2026` |
+| Admin | `equipo@allatonce.com` | `Equipo2026!` |
+| Superadmin | `admin@allatonce.com` | `Admin2026!` |
 
-```
-├── index.html          ← home (carrusel, shelf, ofertas, grid)
-├── categoria.html      ← secciones: ofertas y 5 categorías (?cat=)
-├── producto.html       ← ficha (galería, variantes, reviews, comprados juntos)
-├── carrito.html · checkout.html · confirmacion.html
-├── cuenta.html         ← panel del cliente (pedidos, direcciones, datos)
-├── login.html · recuperar.html · favoritos.html · buscar.html
-├── contacto.html · sobre-nosotros.html · politicas.html
-├── admin.html          ← panel admin (13 secciones, roles admin/superadmin)
-├── css/                ← styles, auth, producto, paginas, admin
-└── js/                 ← catalog, main, auth, login, admin, categoria,
-                          producto, carrito, checkout, cuenta, favoritos, buscar
-```
+Cupones: `AAO10` (-10%) · `FLASH20` (-20%).
 
-## Rama `dev` — Migración a Next.js + NestJS
+## Diferencias con `main` (demo vanilla)
 
-Arquitectura full-stack en desarrollo para comparar con la demo estática:
+| | `main` (vanilla) | `dev` (Next + Nest) |
+|---|---|---|
+| Datos | localStorage del navegador | SQLite + API REST (Prisma) |
+| Auth | base64 en localStorage | JWT + bcrypt + guards de roles |
+| Totales de pedido | calculados en el navegador (manipulables) | calculados en el servidor |
+| Páginas | 17 archivos HTML estáticos | 16 rutas App Router (React) |
+| Estado | JS suelto por página | Contextos (Cart/Auth), tipado TS |
+| Build | ninguno | `next build` + `nest build` |
 
-- **Next.js** (storefront + panel admin) en `storefront/`
-- **NestJS** (API REST + Prisma/SQLite) en `api/`
+## Pendiente de decisión
 
-Ver `README.md` de la rama `dev` para instrucciones.
+Ver informe comparativo en la conversación / issue antes de mergear a `main`.
+No mergear sin revisión visual.

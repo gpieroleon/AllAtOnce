@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  role     String   @default("cliente")
+  phone    String?
+  reg      DateTime @default(now())
+}
+
+model Product {
+  id              Int     @id @default(autoincrement())
+  name            String
+  slug            String  @unique
+  sku             String?
+  descCorta       String?
+  descLarga       String?
+  cat             String
+  cats            String  @default("[]")
+  etiquetas       String  @default("[]")
+  price           Float
+  old             Float
+  costo           Float?
+  stock           Int     @default(0)
+  variantes       String  @default("[]")
+  imagenes        String  @default("[]")
+  peso            Float?
+  rating          Float   @default(0)
+  reviews         Int     @default(0)
+  badge           String?
+  prime           Boolean @default(false)
+  deal            Boolean @default(false)
+  estado          String  @default("publicado")
+  specs           String  @default("{}")
+  feats           String  @default("[]")
+  metaTitulo      String?
+  metaDescripcion String?
+  icon            String?
+  g               String  @default("[]")
+}
+
+model Category {
+  name  String @id
+  label String
+  icon  String?
+  g     String  @default("[]")
+}
+
+model Coupon {
+  code        String  @id
+  tipo        String
+  valor       Float
+  descripcion String?
+}
+
+model ShipMethod {
+  id         String  @id
+  nombre     String
+  desc       String
+  precio     Float
+  gratisDesde Float?
+  extra      Float   @default(0)
+  dias       Int     @default(0)
+  activo     Boolean @default(true)
+}
+
+model PayMethod {
+  id     String  @id
+  nombre String
+  desc   String
+  activo Boolean @default(true)
+}
+
+model Setting {
+  id          Int    @id @default(autoincrement())
+  tienda      String
+  iva         Float
+  moneda      String
+  envioGratis Float
+  envioCoste  Float
+}
+
+model Order {
+  id            String   @id
+  fecha         DateTime @default(now())
+  clienteEmail  String?
+  nombreCliente String
+  items         String
+  subtotal      Float
+  descuento     Float
+  cupon         String?
+  envio         Float
+  total         Float
+  iva           Float
+  direccion     String
+  pago          String
+  estado        String
+  tracking      String
+}
+
+model ReviewHidden {
+  productId Int    @id
+  indexes   String @default("[]")
+}
+
+model ClientNote {
+  id    Int      @id @default(autoincrement())
+  email String
+  text  String
+  fecha DateTime @default(now())
+}

@@ -1,0 +1,65 @@
+/* ═══════════════════════════════════════════════════════════
+   ALL AT ONCE — Storefront (Next.js 14)
+   Estilos base importados de la demo + capa Tailwind.
+   ═══════════════════════════════════════════════════════════ */
+
+@import "../styles/demo/styles.css";
+@import "../styles/demo/producto.css";
+@import "../styles/demo/paginas.css";
+@import "../styles/demo/auth.css";
+@import "../styles/demo/admin.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fuentes cargadas con next/font → variables CSS --font-space / --font-inter */
+:root {
+  --font-display: var(--font-space), "Space Grotesk", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+}
+
+/* next/image envuelve las imágenes en un span: se adapta a los layouts
+   absolutos de las tarjetas de la demo */
+.card__media > span,
+.deal-card__media > span,
+.citem__media > span,
+.cart-item__media > span,
+.together__media > span,
+.ptable__img > span,
+.order-card__thumb > span {
+  position: absolute !important;
+  inset: 0;
+}
+
+/* Imagen principal de la galería de producto (object-fit vía CSS) */
+.pd__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s var(--ease), transform-origin 0.1s;
+}
+
+/* Utilidades extra */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Tabs del panel admin basados en query param (render condicional) */
+.adm-fade {
+  animation: fadeUp 0.35s var(--ease);
+}
