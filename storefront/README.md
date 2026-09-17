@@ -19,7 +19,15 @@ NEXT_PUBLIC_API_URL=http://localhost:3001/api npm run start
   p. ej. `{ "1": 2, "7": 1 }`. Se eligió objeto por búsqueda O(1) y serialización directa.
 - **Wishlist**: `"aao_wishlist"`, array de ids numéricos.
 - **Auth**: JWT en `"aao_token"`, usuario en `"aao_user"`. `AuthContext` valida el token con
-  `GET /auth/me` al montar. Rol `!== "cliente"` redirige siempre a `/admin`.
+  `GET /auth/me` al montar. Separación total de logins:
+  - `/login` es **solo para clientes**: si la API devuelve `role !== "cliente"`, se revoca la
+    sesión al instante y se muestra "Esta cuenta es del equipo. Usa el acceso de administración."
+    sin salir de la página (la API solo revela el rol tras autenticar, así que el rechazo ocurre
+    en el flujo email → contraseña).
+  - `/admin/login` es el acceso del equipo (diseño `.adm-login` oscuro de la demo): acepta solo
+    `admin`/`superadmin`; un cliente recibe "Credenciales de administrador no válidas." sin sesión.
+  - `/admin` sin sesión de staff → redirect a `/admin/login` (también con sesión de cliente).
+  - Con sesión de staff en `/login` → redirect a `/admin`.
 - **Fetch server vs client**: todo el fetching de datos es **cliente** (páginas con
   `"use client"` + `fetch` en efectos). Las rutas dinámicas que dependen de params/buscan
   datos exportan `export const dynamic = "force-dynamic"` para evitar prerender estático roto.
@@ -36,7 +44,10 @@ NEXT_PUBLIC_API_URL=http://localhost:3001/api npm run start
   (`"aao_categories_custom"`) indicándolo en pantalla.
 - **Estilos**: `src/app/globals.css` importa los CSS de la demo (`src/styles/demo/`,
   copia de referencia, no del raíz) + capa Tailwind; fuentes Space Grotesk e Inter vía
-  `next/font/google`.
+  `next/font/google`. Las imágenes de producto usan el componente `CoverImg`
+  (`position:absolute; inset:0; object-fit:cover` + `onError` que las oculta para
+  mostrar el degradado de fondo); el shelf de categorías fuerza celdas cuadradas con
+  `aspect-ratio: 1/1`.
 
 ## Estructura
 

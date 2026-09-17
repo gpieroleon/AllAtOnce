@@ -19,19 +19,6 @@
   --font-body: var(--font-inter), "Inter", sans-serif;
 }
 
-/* next/image envuelve las imágenes en un span: se adapta a los layouts
-   absolutos de las tarjetas de la demo */
-.card__media > span,
-.deal-card__media > span,
-.citem__media > span,
-.cart-item__media > span,
-.together__media > span,
-.ptable__img > span,
-.order-card__thumb > span {
-  position: absolute !important;
-  inset: 0;
-}
-
 /* Imagen principal de la galería de producto (object-fit vía CSS) */
 .pd__img {
   position: absolute;
@@ -48,6 +35,41 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* ── Shelf de categorías: celdas cuadradas e iguales (como la demo) ──
+   La imagen define la altura con aspect-ratio 1/1 + object-fit: cover,
+   de modo que las 4 tarjetas quedan compactas y con la misma altura. */
+.shelf__grid {
+  align-items: stretch;
+}
+.quad {
+  height: 100%;
+}
+.quad__grid {
+  flex: 0 0 auto;
+}
+.quad__cell {
+  min-height: 0;
+}
+.quad__cell img {
+  flex: none;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Imagen de producto: posicionamiento explícito e independiente de
+   la cascada (se ve SIEMPRE; el degradado queda debajo como fondo). */
+.card__img,
+.deal-card__img,
+.together__media img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .sr-only {

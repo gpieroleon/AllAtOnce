@@ -8,6 +8,7 @@ import { useCatalog, sortProducts } from "@/components/hooks";
 import { CountdownBoxes } from "@/components/Countdown";
 import { DealCard, ProductCard } from "@/components/ProductCard";
 import { Icon } from "@/components/Icon";
+import { CoverImg } from "@/components/CoverImg";
 
 const SLIDES = [
   {
@@ -113,8 +114,7 @@ function CategoryShelf({ products }: { products: Product[] }) {
               <div className="quad__grid">
                 {cells.map((p) => (
                   <Link className="quad__cell" href={`/categoria/${encodeURIComponent(c.name)}`} key={p.id}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.img} alt={p.name} loading="lazy" />
+                    <CoverImg src={p.img} alt={p.name} loading="lazy" />
                     <span>{p.name.split(" ").slice(0, 2).join(" ")}</span>
                   </Link>
                 ))}

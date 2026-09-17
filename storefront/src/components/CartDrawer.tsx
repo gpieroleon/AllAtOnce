@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { fmt } from "@/lib/format";
 import { Icon } from "@/components/Icon";
+import { CoverImg } from "@/components/CoverImg";
 import { FREE_SHIP_FALLBACK } from "@/lib/constants";
 
 export function CartDrawer() {
@@ -81,9 +82,7 @@ export function CartDrawer() {
                   onClick={() => setDrawerOpen(false)}
                   style={{ background: "linear-gradient(140deg,#FF6A00,#FF3D1F)" }}
                 >
-                  {l.product?.img ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img className="citem__img" src={l.product.img} alt={l.product.name} />
+                  {l.product?.img ? (                    <CoverImg className="citem__img" src={l.product.img} alt={l.product.name} />
                   ) : (
                     <Icon name="box" className="citem__fallback" />
                   )}

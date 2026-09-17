@@ -8,6 +8,7 @@ import { get } from "@/lib/api";
 import { catLabel, defaultShipDays, deliveryDate, discount, fmt } from "@/lib/format";
 import { useCart } from "@/context/CartContext";
 import { Icon, Stars } from "@/components/Icon";
+import { CoverImg } from "@/components/CoverImg";
 import { ProductCard } from "@/components/ProductCard";
 
 export default function ProductoPage({ id }: { id: string }) {
@@ -156,8 +157,7 @@ export default function ProductoPage({ id }: { id: string }) {
                   }}
                   aria-label={`Imagen ${i + 1}`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt="" />
+                  <CoverImg src={src} alt="" />
                 </button>
               ))}
             </div>
@@ -168,8 +168,7 @@ export default function ProductoPage({ id }: { id: string }) {
             style={{ background: "linear-gradient(140deg,#FF6A00,#FF3D1F)" }}
           >
             {images.length > 0 ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img className="pd__img" src={images[imgIndex]} alt={product.name} />
+              <CoverImg className="pd__img" src={images[imgIndex]} alt={product.name} />
             ) : (
               <Icon name="box" className="pd__fallback" />
             )}
@@ -343,8 +342,7 @@ export default function ProductoPage({ id }: { id: string }) {
                 <span className="together__tag">Este artículo: {product.name}</span>
                 <Link className="together__media" href={`/producto/${product.id}`} style={{ background: "linear-gradient(140deg,#FF6A00,#FF3D1F)" }}>
                   {product.img ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={product.img} alt={product.name} />
+                    <CoverImg src={product.img} alt={product.name} />
                   ) : (
                     <Icon name="box" className="together__fallback" />
                   )}
@@ -364,8 +362,7 @@ export default function ProductoPage({ id }: { id: string }) {
                   <span className="together__tag">{p.name}</span>
                   <Link className="together__media" href={`/producto/${p.id}`} style={{ background: "linear-gradient(140deg,#7C3AED,#4F46E5)" }}>
                     {p.img ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={p.img} alt={p.name} />
+                      <CoverImg src={p.img} alt={p.name} />
                     ) : (
                       <Icon name="box" className="together__fallback" />
                     )}

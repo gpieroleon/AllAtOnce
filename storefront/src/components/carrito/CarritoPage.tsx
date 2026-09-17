@@ -8,6 +8,7 @@ import { FREE_SHIP_FALLBACK, IVA_FALLBACK } from "@/lib/constants";
 import type { CouponValidation } from "@/lib/types";
 import { useCart } from "@/context/CartContext";
 import { Icon } from "@/components/Icon";
+import { CoverImg } from "@/components/CoverImg";
 
 export default function CarritoPage() {
   const { lines, subtotal, count, setQty, remove, toggleWish } = useCart();
@@ -89,9 +90,7 @@ export default function CarritoPage() {
                     href={`/producto/${l.id}`}
                     style={{ background: "linear-gradient(140deg,#FF6A00,#FF3D1F)" }}
                   >
-                    {l.product?.img ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={l.product.img} alt={l.product.name} />
+                    {l.product?.img ? (                      <CoverImg src={l.product.img} alt={l.product.name} />
                     ) : (
                       <Icon name="box" />
                     )}

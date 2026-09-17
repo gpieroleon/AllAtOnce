@@ -12,7 +12,7 @@ export default function LoginPage() {
   const router = useRouter();
   const params = useSearchParams();
   const from = params.get("from") || "/";
-  const { login, register, user, ready } = useAuth();
+  const { login, register, logout, user, ready } = useAuth();
 
   const [mode, setMode] = useState<"email" | "password" | "register">(
     params.get("nuevo") ? "register" : "email"
@@ -48,10 +48,15 @@ export default function LoginPage() {
     try {
       const { user: u } = await login(email, password);
       if (u.role !== "cliente") {
-        router.push("/admin");
-      } else {
-        router.push(from);
+        // /login es SOLO para clientes: se anula la sesión staff al instante
+        // y se rechaza el acceso sin salir de la página.
+        logout();
+        setPassword("");
+        setMode("email");
+        setError("Esta cuenta es del equipo. Usa el acceso de administración.");
+        return;
       }
+      router.push(from);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "No se pudo iniciar sesión. Inténtalo de nuevo.");
     } finally {
@@ -225,19 +230,6 @@ export default function LoginPage() {
               </button>
             </p>
           )}
-        </div>
-
-        <div className="auth__demo">
-          <p>Cuentas de demostración del contrato API:</p>
-          <div className="auth__demo-creds">
-            <code>demo@allatonce.com</code>
-            <code>AllAtOnce#2026</code>
-          </div>
-          <p style={{ marginBottom: 8 }}>Equipo (acceso al panel):</p>
-          <div className="auth__demo-creds">
-            <code>equipo@allatonce.com</code>
-            <code>Equipo2026!</code>
-          </div>
         </div>
 
         <div className="auth__foot">

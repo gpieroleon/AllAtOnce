@@ -98,13 +98,12 @@ export default function AdminPage() {
 
   const sec = params.get("sec") || "dashboard";
 
-  // Guard: sin token → /login; cliente autenticado → tienda
+  // Guard: /admin exige sesión de staff (admin/superadmin).
+  // Sin token o con sesión de cliente → /admin/login.
   useEffect(() => {
     if (!ready) return;
-    if (!localStorage.getItem("aao_token")) {
-      router.replace(`/login?from=${encodeURIComponent("/admin")}`);
-    } else if (user && !isAdmin) {
-      router.replace("/");
+    if (!localStorage.getItem("aao_token") || (user && !isAdmin)) {
+      router.replace("/admin/login");
     }
   }, [ready, user, isAdmin, router]);
 

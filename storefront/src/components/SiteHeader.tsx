@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { Icon } from "@/components/Icon";
@@ -35,6 +35,7 @@ export function SiteHeader() {
   const { user, isAdmin, logout } = useAuth();
   const { count, wishlist, setDrawerOpen } = useCart();
   const router = useRouter();
+  const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
@@ -67,8 +68,6 @@ export function SiteHeader() {
     const q = query.trim();
     router.push(q ? `/buscar?q=${encodeURIComponent(q)}` : "/buscar");
   };
-
-  const path = typeof window !== "undefined" ? window.location.pathname : "";
 
   return (
     <>
@@ -199,7 +198,7 @@ export function SiteHeader() {
         <nav className={`catnav ${catOpen ? "is-open" : ""}`} aria-label="Secciones">
           <div className="container catnav__inner">
             <Link
-              className={`catnav__link ${path === "/categoria/ofertas" ? "is-active" : ""}`}
+              className={`catnav__link ${pathname === "/categoria/ofertas" ? "is-active" : ""}`}
               href="/categoria/ofertas"
               onClick={() => setCatOpen(false)}
             >
@@ -208,7 +207,7 @@ export function SiteHeader() {
             {NAV.slice(1).map((item) => (
               <Link
                 key={item.href}
-                className={`catnav__link ${path === item.href ? "is-active" : ""}`}
+                className={`catnav__link ${pathname === item.href ? "is-active" : ""}`}
                 href={item.href}
                 onClick={() => setCatOpen(false)}
               >

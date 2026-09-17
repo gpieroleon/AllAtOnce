@@ -14,6 +14,7 @@ import {
   saveAddresses,
   StoredAddress,
 } from "@/lib/storage";
+import { CoverImg } from "@/components/CoverImg";
 import { Icon } from "@/components/Icon";
 
 export const ESTADOS = ["Pendiente de pago", "Pagado", "En preparación", "Enviado", "Entregado"];
@@ -72,9 +73,7 @@ function OrderCard({ order, open, onToggle }: { order: Order; open: boolean; onT
           <div className="order-card__items">
             {order.items.slice(0, 4).map((it) => (
               <span className="order-card__thumb" key={it.id} style={{ background: "linear-gradient(140deg,#FF6A00,#FF3D1F)" }}>
-                {it.img ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={it.img} alt={it.nombre} />
+                {it.img ? (                  <CoverImg src={it.img} alt={it.nombre} />
                 ) : (
                   <Icon name="box" />
                 )}

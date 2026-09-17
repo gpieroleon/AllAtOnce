@@ -5,6 +5,7 @@ import type { Product } from "@/lib/types";
 import { discount, fmt, soldPct } from "@/lib/format";
 import { useCart } from "@/context/CartContext";
 import { Icon, Stars } from "@/components/Icon";
+import { CoverImg } from "@/components/CoverImg";
 
 function badge(p: Product) {
   if (p.badge === "flash") return <span className="pill pill--off">-{discount(p)}%</span>;
@@ -21,9 +22,7 @@ export function ProductCard({ p, index = 0, showWish = true }: { p: Product; ind
   return (
     <article className="card" style={{ animationDelay: `${Math.min(index * 55, 400)}ms` }}>
       <Link className="card__media" href={`/producto/${p.id}`} style={{ background: "linear-gradient(140deg,#FF6A00,#FF3D1F)" }} aria-label={`Ver ${p.name}`}>
-        {p.img ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="card__img" src={p.img} alt={p.name} loading="lazy" />
+        {p.img ? (          <CoverImg className="card__img" src={p.img} alt={p.name} loading="lazy" />
         ) : (
           <Icon name="box" className="card__fallback" />
         )}
@@ -75,9 +74,7 @@ export function DealCard({ p }: { p: Product }) {
   return (
     <article className="deal-card">
       <Link className="deal-card__media" href={`/producto/${p.id}`} style={{ background: "linear-gradient(140deg,#FF6A00,#FF3D1F)" }} aria-label={`Ver ${p.name}`}>
-        {p.img ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="deal-card__img" src={p.img} alt={p.name} loading="lazy" />
+        {p.img ? (          <CoverImg className="deal-card__img" src={p.img} alt={p.name} loading="lazy" />
         ) : (
           <Icon name="box" className="deal-card__fallback" />
         )}

@@ -7,6 +7,7 @@ import { del, get, patch, post } from "@/lib/api";
 import { discount, fmt, slugify } from "@/lib/format";
 import { useToast } from "@/context/ToastContext";
 import { Icon, Stars } from "@/components/Icon";
+import { CoverImg } from "@/components/CoverImg";
 
 // ── Carga del catálogo completo (admin): intenta /admin/products,
 //    si no existe cae al listado público ─────────────────────────
@@ -579,9 +580,7 @@ export default function ProductsSection({ isSuper }: { isSuper: boolean }) {
                   <td>
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                       <span className="ptable__img" style={{ background: "linear-gradient(140deg,#FF6A00,#FF3D1F)" }}>
-                        {p.img ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={p.img} alt="" />
+                        {p.img ? (                          <CoverImg src={p.img} alt="" />
                         ) : (
                           <Icon name="box" />
                         )}
