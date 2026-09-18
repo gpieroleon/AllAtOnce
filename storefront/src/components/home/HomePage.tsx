@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import type { Category, Product } from "@/lib/types";
 import { get } from "@/lib/api";
+import { CATEGORY_EXTRAS } from "@/lib/constants";
 import { useCatalog, sortProducts } from "@/components/hooks";
 import { CountdownBoxes } from "@/components/Countdown";
 import { DealCard, ProductCard } from "@/components/ProductCard";
@@ -108,6 +109,7 @@ function CategoryShelf({ products }: { products: Product[] }) {
         {quads.map((c) => {
           const items = products.filter((p) => p.cat === c.name || p.cats?.includes(c.name));
           const cells = items.slice(0, 4);
+          const extras = (CATEGORY_EXTRAS[c.name] ?? []).slice(0, 4 - cells.length);
           return (
             <div className="quad" key={c.name}>
               <h3>{c.label}</h3>
@@ -118,7 +120,13 @@ function CategoryShelf({ products }: { products: Product[] }) {
                     <span>{p.name.split(" ").slice(0, 2).join(" ")}</span>
                   </Link>
                 ))}
-                {cells.length === 0 && (
+                {extras.map((img, i) => (
+                  <Link className="quad__cell" href={`/categoria/${encodeURIComponent(c.name)}`} key={img}>
+                    <CoverImg src={img} alt={i === 0 ? "Novedades" : "Selección"} loading="lazy" />
+                    <span>{i === 0 ? "Novedades" : "Selección"}</span>
+                  </Link>
+                ))}
+                {cells.length === 0 && extras.length === 0 && (
                   <Link className="quad__cell" href={`/categoria/${encodeURIComponent(c.name)}`}>
                     <span>{c.label}</span>
                   </Link>
