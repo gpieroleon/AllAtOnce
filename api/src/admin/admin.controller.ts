@@ -105,7 +105,8 @@ export class AdminController {
   @Get('clients')
   async clients() {
     const [users, orders] = await Promise.all([
-      this.prisma.user.findMany({ orderBy: { id: 'asc' } }),
+      // Solo clientes: el equipo no aparece en la sección de clientes
+      this.prisma.user.findMany({ where: { role: 'cliente' }, orderBy: { id: 'asc' } }),
       this.prisma.order.findMany(),
     ]);
     return users.map((u) => {
