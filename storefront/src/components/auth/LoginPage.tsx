@@ -86,10 +86,22 @@ export default function LoginPage() {
     }
   };
 
+  // "Atrás": vuelve un paso dentro del flujo (contraseña/registro → correo);
+  // en el primer paso vuelve a la página anterior (o al inicio sin historial).
+  const goBack = () => {
+    if (mode !== "email") {
+      setError(null);
+      setMode("email");
+      return;
+    }
+    if (window.history.length > 1) router.back();
+    else router.push("/");
+  };
+
   return (
     <div className="auth-page">
       <div className="auth">
-        <button className="auth__backbtn" onClick={() => router.back()} type="button">
+        <button className="auth__backbtn" onClick={goBack} type="button">
           <Icon name="chevL" /> Atrás
         </button>
         <div className="auth__logo">
@@ -119,7 +131,7 @@ export default function LoginPage() {
                 type="email"
                 autoComplete="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.replace(/\s+/g, ""))}
                 autoFocus
               />
               <button className="auth__btn" type="submit">
@@ -150,7 +162,7 @@ export default function LoginPage() {
                 type={showPw ? "text" : "password"}
                 autoComplete="current-password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value.replace(/\s+/g, ""))}
                 autoFocus
               />
               <label className="auth__check">
@@ -189,7 +201,7 @@ export default function LoginPage() {
                 type="email"
                 autoComplete="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.replace(/\s+/g, ""))}
               />
               <label className="auth__label" htmlFor="password2">
                 Contraseña (mín. 6 caracteres)
@@ -200,7 +212,7 @@ export default function LoginPage() {
                 type={showPw ? "text" : "password"}
                 autoComplete="new-password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value.replace(/\s+/g, ""))}
               />
               <label className="auth__check">
                 <input type="checkbox" checked={showPw} onChange={(e) => setShowPw(e.target.checked)} />
