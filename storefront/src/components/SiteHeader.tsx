@@ -125,17 +125,11 @@ export function SiteHeader() {
               </button>
               {menuOpen && (
                 <div className="auth-menu" role="menu">
-                  <p className="auth-menu__hello">
-                    {user ? (
-                      <>
-                        Hola, <strong>{user.name}</strong>
-                      </>
-                    ) : (
-                      <>
-                        Hola, <strong>identifícate</strong>
-                      </>
-                    )}
-                  </p>
+                  {user && (
+                    <p className="auth-menu__hello">
+                      Hola, <strong>{user.name}</strong>
+                    </p>
+                  )}
                   {user ? (
                     <>
                       {isAdmin ? (
@@ -171,9 +165,6 @@ export function SiteHeader() {
                       </Link>
                       <Link className="auth-menu__item" href="/login?nuevo=1" onClick={() => setMenuOpen(false)}>
                         Crear cuenta
-                      </Link>
-                      <Link className="auth-menu__item" href="/cuenta" onClick={() => setMenuOpen(false)}>
-                        Mi cuenta
                       </Link>
                     </>
                   )}
