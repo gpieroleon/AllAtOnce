@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { Logo } from "@/components/SiteHeader";
+import { Icon } from "@/components/Icon";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -43,6 +44,10 @@ export default function AdminLoginPage() {
   return (
     <div className="auth-page adm-login">
       <div className="auth">
+        {/* Hueco invisible: mantiene la posición del bloque al no haber botón Atrás */}
+        <button className="auth__backbtn" style={{ visibility: "hidden" }} disabled tabIndex={-1} aria-hidden="true" type="button">
+          <Icon name="chevL" /> Atrás
+        </button>
         <div className="auth__logo">
           <Logo light />
         </div>
