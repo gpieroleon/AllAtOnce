@@ -17,7 +17,9 @@ export class UsersAdminService {
   }
 
   list() {
+    // Solo el equipo: los clientes se gestionan en /admin/clients
     return this.prisma.user.findMany({
+      where: { role: { in: ['admin', 'superadmin'] } },
       orderBy: { id: 'asc' },
       select: {
         id: true,
