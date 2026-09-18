@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
@@ -95,8 +95,18 @@ export default function AdminPage() {
   const { user, ready, isAdmin, logout } = useAuth();
   const [sideOpen, setSideOpen] = useState(false);
   const [bellOpen, setBellOpen] = useState(false);
+  const bellRef = useRef<HTMLDivElement>(null);
 
   const sec = params.get("sec") || "dashboard";
+
+  // Cerrar las notificaciones al hacer clic fuera de ellas
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (bellRef.current && !bellRef.current.contains(e.target as Node)) setBellOpen(false);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   // Guard: /admin exige sesión de staff (admin/superadmin).
   // Sin token o con sesión de cliente → /admin/login.
@@ -219,7 +229,7 @@ export default function AdminPage() {
             </div>
           </div>
           <div className="adm__topright">
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} ref={bellRef}>
               <button className="adm__bell" onClick={() => setBellOpen((v) => !v)} aria-label="Notificaciones">
                 <Icon name="bell" />
                 <span className="adm__bellcount">3</span>
